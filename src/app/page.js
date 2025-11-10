@@ -14,7 +14,9 @@ export default function Home() {
         <FilterOption />
         <FilterOption />
       </section>
-      <PetList />
+      <section className="grid grid-cols-2 gap-4 py-4">
+        <PetList />
+      </section>
       <Footer />
     </main>
   );

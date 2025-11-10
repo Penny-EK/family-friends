@@ -12,7 +12,7 @@ const details = () => {
       <div className="grid grid-cols-1 grid-rows-1">
         {/* img */}
         <Image
-          src="https://cataas.com/cat"
+          src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
           alt="Adoptable cat"
           width={339}
           height={360}
@@ -38,7 +38,7 @@ const details = () => {
         </Link>
         <div className="col-[1/2] row-[1/2] m-6 inline-flex items-start justify-start gap-2 self-end justify-self-start rounded-2xl bg-white/20 py-2 pr-4 pl-2 backdrop-blur-lg">
           <Image
-            src="https://cataas.com/cat"
+            src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
             alt="Adoptable cat"
             width={32}
             height={32}
