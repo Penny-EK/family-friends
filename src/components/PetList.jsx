@@ -17,7 +17,7 @@ const FetchProducts = async () => {
   const { products } = await response.json();
   return products.map((product) => (
     <Link
-      href="/details"
+      href={`/details/${product.id}`}
       className="h-fit w-40 rounded-2xl bg-white shadow-[0_4px_16px_0_rgba(19,21,68,0.06)]"
       key={product.id}
     >

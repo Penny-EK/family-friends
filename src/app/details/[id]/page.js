@@ -5,24 +5,27 @@ import Link from "next/link";
 
 import InfoCard from "@/components/InfoCard";
 
-const details = () => {
+const details = async ({ params }) => {
+  const { id } = await params;
+  // Fetch the product using the dynamic ID from the URL
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  const product = await response.json();
+  console.log(product);
+
   return (
     <>
       {/* hero */}
       <div className="grid grid-cols-1 grid-rows-1">
         {/* img */}
         <Image
-          src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
-          alt="Adoptable cat"
+          src={product.images[0]}
+          alt={product.title}
           width={339}
           height={360}
           loading="eager"
           className="col-[1/2] row-[1/2] h-[360px] w-[339px] rounded-4xl object-cover"
         />
-        <button
-          onClick={console.log("fav")}
-          className="col-[1/2] row-[1/2] m-6 self-start justify-self-end rounded-full bg-[#FEFEFE]/40 p-1"
-        >
+        <button className="col-[1/2] row-[1/2] m-6 self-start justify-self-end rounded-full bg-[#FEFEFE]/40 p-1">
           <FaRegStar className="self-center justify-self-center" />
         </button>
 
@@ -38,8 +41,8 @@ const details = () => {
         </Link>
         <div className="col-[1/2] row-[1/2] m-6 inline-flex items-start justify-start gap-2 self-end justify-self-start rounded-2xl bg-white/20 py-2 pr-4 pl-2 backdrop-blur-lg">
           <Image
-            src="https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
-            alt="Adoptable cat"
+            src={product.images[0]}
+            alt={product.title}
             width={32}
             height={32}
             loading="eager"
@@ -52,13 +55,12 @@ const details = () => {
       </div>
       {/* information */}
       <h1 className="my-3 justify-start font-['Manrope'] text-3xl leading-8 font-bold text-zinc-800">
-        Samojed Willie
+        {product.title}
       </h1>
       <div className="my-4 flex gap-2">
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
-        <InfoCard />
+        {product.tags?.map((tag, index) => (
+          <InfoCard key={index} tag={tag} />
+        ))}
       </div>
       <div className="h-24 w-80 justify-start font-['Manrope'] text-base leading-6 font-medium text-zinc-800 opacity-75">
         Den venligste Samojed, vi nogensinde har mødt. Elsker at lege med bolde
@@ -82,5 +84,17 @@ const details = () => {
     </>
   );
 };
+
+// const FetchTags = async () => {
+//   const response = await fetch("https://dummyjson.com/products");
+//   const { products } = await response.json();
+//   return products.map((product) => (
+//     <div className="inline-flex items-center justify-center gap-2.5 rounded-[20px] bg-lime-200 px-3.5 py-2">
+//       <div className="justify-start font-['Manrope'] text-xs leading-4 font-medium text-stone-500">
+//         Young
+//       </div>
+//     </div>
+//   ));
+// };
 
 export default details;
