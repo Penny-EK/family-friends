@@ -24,7 +24,7 @@ const FetchProducts = async () => {
       <div className="grid grid-cols-1 grid-rows-1">
         <Image
           src={product.images[0]}
-          alt="Adoptable cat"
+          alt={product.title}
           width={160}
           height={114}
           loading="eager"
