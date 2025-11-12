@@ -1,17 +1,25 @@
+"use client";
+
 import Image from "next/image";
-const FilterOption = () => {
+import { useRouter } from "next/navigation";
+const FilterOption = ({ category, isSelected }) => {
+  const router = useRouter();
   return (
-    <article className="flex w-fit shrink-0 flex-row items-center gap-[9px] rounded-full border border-gray-300 p-2.5 pr-[25px]">
-      <Image
-        src="https://cataas.com/cat"
-        alt="Adoptable cat"
-        width={32}
-        height={32}
-        loading="eager"
-        className="h-8 w-8 rounded-full object-cover"
-      />
-      <p className="text-[#333333]/40">Katte</p>
-    </article>
+    <div
+      className={`flex w-fit shrink-0 cursor-pointer flex-row items-center gap-[9px] rounded-full border p-2.5 pr-[25px] transition-all ${
+        isSelected
+          ? "border-[#F2968F] bg-[#F2968F] shadow-md"
+          : "border-gray-300 bg-white"
+      }`}
+      onClick={() => router.push(`?category=${category.slug}`)}
+    >
+      <div className="h-8 w-8 rounded-full bg-[#F2968F] object-cover"></div>
+      <p
+        className={isSelected ? "font-medium text-white" : "text-[#333333]/40"}
+      >
+        {category.name}
+      </p>
+    </div>
   );
 };
 
