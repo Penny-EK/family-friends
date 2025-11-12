@@ -1,4 +1,3 @@
-// components
 import PetList from "@/components/PetList";
 import FilterContainer from "@/components/FilterContainer";
 import Footer from "@/components/Footer";
@@ -11,7 +10,7 @@ export default async function Home({ searchParams }) {
       <section className="flex gap-4 overflow-x-auto py-4">
         <FilterContainer selectedCategory={category} />
       </section>
-      <section className="grid h-[80vh] grid-cols-2 gap-4 overflow-y-scroll py-4">
+      <section className="grid max-h-[80vh] grid-cols-2 gap-4 overflow-y-scroll py-4">
         <Suspense>
           <PetList category={category} />
         </Suspense>
