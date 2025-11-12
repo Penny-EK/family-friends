@@ -4,15 +4,17 @@ import Image from "next/image";
 import { FaRegStar } from "react-icons/fa";
 import { Suspense } from "react";
 
-const PetList = () => {
+const PetList = ({ category }) => {
   return (
     <Suspense>
-      <FetchProducts />
+      <FetchProducts category={category} />
     </Suspense>
   );
 };
 
-const FetchProducts = async () => {
+const FetchProducts = async ({ category }) => {
+  "use server";
+  console.log(category);
   const colors = [
     "#f5d0c7",
     "#ec8b84",
@@ -21,7 +23,10 @@ const FetchProducts = async () => {
     "#bbedec",
     "#a2cf8a",
   ];
-  const response = await fetch("https://dummyjson.com/products/");
+  const url = category
+    ? `https://dummyjson.com/products/category/${category}`
+    : "https://dummyjson.com/products";
+  const response = await fetch(url);
   const { products } = await response.json();
   return products.map((product) => {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -44,7 +49,10 @@ const FetchProducts = async () => {
             className="col-[1/2] row-[1/2] h-[114px] w-40 rounded-2xl object-cover"
           />
           <button className="col-[1/2] row-[1/2] m-2 self-start justify-self-end rounded-full bg-[#FEFEFE]/40 p-1">
-            <FaRegStar className="self-center justify-self-center" />
+            <FaRegStar
+              className="self-center justify-self-center"
+              color="#ffff"
+            />
           </button>
         </div>
         <div className="grid grid-cols-2 px-2.5 pt-2 pb-4">
@@ -55,7 +63,7 @@ const FetchProducts = async () => {
             {product.price},-
           </h3>
 
-          <h3 className="h-7 w-20 justify-start font-['Manrope'] text-xs leading-4 font-medium text-zinc-800 capitalize opacity-40">
+          <h3 className="justify-start text-xs leading-4 font-medium text-zinc-800 capitalize opacity-40">
             {product.brand ? product.brand : "Unknown Brand"}
           </h3>
         </div>

@@ -23,7 +23,10 @@ const details = async ({ params }) => {
           className="col-[1/2] row-[1/2] h-[360px] w-[339px] rounded-4xl object-cover"
         />
         <button className="col-[1/2] row-[1/2] m-6 self-start justify-self-end rounded-full bg-[#FEFEFE]/40 p-1">
-          <FaRegStar className="self-center justify-self-center" />
+          <FaRegStar
+            className="self-center justify-self-center"
+            color="#ffff"
+          />
         </button>
 
         <Link
