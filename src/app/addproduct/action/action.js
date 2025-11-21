@@ -2,12 +2,26 @@
 export const submitProduct = async (prevState, formData) => {
   const error = {};
   const productName = formData.get("productname");
+  const productPrice = formData.get("productprice");
+
+  
   if (!productName) {
-    error.productName = "product name is required";
+    error.productName = "feltet skal udfyldes";
+  } else if (productName.length < 5) {
+    error.productName = "feltet skal indeholde mindst 5 tegn";
   }
-  //   if else (productName.length < 5) {
-  //     console.log("validation failed");
-  //     error.productName = "product name must be at least 5 characters long";
-  //   }
-  return { error, productName };
+
+
+  if (!productPrice) {
+    error.productPrice = "feltet skal udfyldes";
+  } else if (isNaN(Number(productPrice))) {
+    error.productPrice = "prisen skal være et tal";
+  }
+
+
+  if (Object.keys(error).length > 0) {
+    return { error };
+  }
+
+  return { success: true, error: {} };
 };
